@@ -102,6 +102,11 @@ class ComicController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comic = Comic::find($id);
+
+        $comic->delete();
+        // oltre a reindirizzare alla index passo in sessione la variabile 'deleted'
+        // la variabile di sessione viene passata con with(nome_variabile, nome)
+        return redirect()->route('comics.index')->with('deleted', 'Il fumetto'. $comic->title .'è stato eliminato');
     }
 }
