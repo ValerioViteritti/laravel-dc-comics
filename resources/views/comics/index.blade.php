@@ -7,7 +7,7 @@
 
         {{-- se la variabile di sessione 'deleted' esiste stampo il valore  --}}
         @if (session('deleted'))
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ session('deleted') }}
             </div>
         @endif
@@ -40,15 +40,7 @@
                             <a href="{{ route('comics.edit', $comic) }}" class="btn btn-warning" title="modifica">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <form class="d-inline" action="{{ route('comics.destroy', $comic) }}" method="POST"
-                                onsubmit="return confirm('Sei sicuro di eliminare il fumetto: {{ $comic->title }} ?')">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" href="{{ route('comics.destroy', $comic) }}" class="btn btn-danger"
-                                    title="elimina">
-                                    <i class="fa-solid fa-trash"></i></button>
-                            </form>
+                            @include('partials.formdelete')
 
 
                         </td>
