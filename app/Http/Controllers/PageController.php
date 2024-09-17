@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 // QUI VA INSERITO IL MODELS
+use App\Models\Comic;
 
 class PageController extends Controller
 {
     public function index(){
 
         // $movies = Movie::orderBy('title')->get();
-        // $title = 'Elenco Film';
-
-        return view('home',);
+        $title = 'Fumetti della DC Comics';
+        $num_fumetti = Comic::count();
+        $ultimo_fumetto = Comic::latest()->first();
+        $last_fumetto = $ultimo_fumetto->title;
+        return view('home', compact('title', 'num_fumetti', 'last_fumetto'));
         // compact('movies', 'title')
     }
 
