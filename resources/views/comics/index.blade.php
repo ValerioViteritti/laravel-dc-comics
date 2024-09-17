@@ -22,8 +22,13 @@
                         <td><img class="thumbnail" src="{{ $comic->thumb }}" alt="{{ $comic->title }}"></td>
                         <td>{{ $comic->title }}</td>
                         <td>{{ $comic->price }}</td>
-                        <td><a href="{{ route('comics.show', $comic) }}" class="btn btn-success"><i
-                                    class="fa-solid fa-eye"></i></a></td>
+                        <td>
+                            <a href="{{ route('comics.show', $comic) }}" class="btn btn-success" title="vedi"><i
+                                    class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('comics.edit', $comic) }}" class="btn btn-warning" title="modifica">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -70,7 +70,9 @@ class ComicController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comic =Comic::find($id);
+        // dump($comic);
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -78,7 +80,21 @@ class ComicController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $comic = Comic::find($id);
+
+        // se il titolo è cambiato, genero un nuovo slug, altrimenti mantengo quello presente
+        if($data['title'] === $comic->title){
+            $data['slug'] = $comic->slug;
+        } else {
+            $data['slug'] = Helper::generateSlug($data['title'], Comic::class);
+        }
+        // update esegue il fill dei dati aggiornandoli
+        $comic->update($data);
+
+        return redirect()->route('comics.show', $comic);
+        // dump($data);
+        // dump($id);
     }
 
     /**
