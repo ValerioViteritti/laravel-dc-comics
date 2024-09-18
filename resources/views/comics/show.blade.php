@@ -4,6 +4,14 @@
 
 @section('content')
     <div class="container my-5">
+
+        @if (session('edit'))
+            <div class="alert alert-success" role="alert">
+                {{ session('edit') }}
+            </div>
+        @endif
+
+
         <h1>{{ $comic->title }} <a href="{{ route('comics.edit', $comic) }}" class="btn btn-warning" title="modifica">
                 <i class="fa-solid fa-pen"></i></a>
             @include('partials.formdelete')
