@@ -14,7 +14,11 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::all();
+        if (isset($_GET['tosearch'])){
+            $comics = Comic::where('title', 'LIKE', '%'.$_GET['tosearch'].'%')->paginate(10);
+        } else {
+            $comics = Comic::orderBy('title')->paginate(5);
+        }
         return view('comics.index', compact('comics'));
     }
 
